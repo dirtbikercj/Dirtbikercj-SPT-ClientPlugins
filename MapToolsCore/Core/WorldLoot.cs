@@ -12,7 +12,7 @@ namespace MapTools.Core
 
     public class WorldLoot
     {
-        private readonly Render _renderer = MapTools.instance.renderer;
+        private readonly Render _renderer = MapTools.renderer;
         public void ListAllLoot(GameWorld gameWorldInstance)
         {
             List<LootItemPositionClass> allLoot = AccessTools.Field(typeof(GameWorld), "AllLoot").GetValue(gameWorldInstance) as List<LootItemPositionClass>;
@@ -35,7 +35,7 @@ namespace MapTools.Core
             ConsoleScreen.Log($"Loot items found: {lootcount}");
         }
 
-        public void GetWorldPoint(LooseLootJsonBuilder jsonDump, Render draw)
+        public void GetWorldPoint(LooseLootJsonBuilder jsonDump)
         {
             if (Singleton<GameWorld>.Instantiated)
             {
@@ -51,7 +51,7 @@ namespace MapTools.Core
                 if (hit.point != null)
                 {
                     ConsoleScreen.Log($"LootDebug: World Position: {hit.point} \n");
-                    AddLootEntry(hit.point, jsonDump);
+                    MapTools.instance.looseLootJsonBuilder.AddLooseLootPoint(hit.point);
                     _renderer.AddSphereToList(hit.point);
 
                     if (ConfigMapTools.enableLootSpheres.Value == true)
@@ -59,40 +59,7 @@ namespace MapTools.Core
                         _renderer.DrawLootSpheres();
                     }
                 }
-                else
-                {
-                    ConsoleScreen.LogError("LootDebug: No Suitable Collider found. \n");
-                }
             }
-        }
-
-        private string CreateIdHash()
-        {
-            var random = new System.Random();
-            string lootId = ConfigLooseLootJson.id.Value + " ";
-            int randNum = random.Next(1000000);
-            string key = randNum.ToString("D7");
-            lootId += key;
-            return lootId;
-        }
-
-        private void AddLootEntry(Vector3 point, LooseLootJsonBuilder jsonDump)
-        {
-            WorldLootJson.locationId = $"({point.x}, {point.y}, {point.z})";
-            WorldLootJson.probability = ConfigLooseLootJson.probability.Value;
-            WorldLootJson.Id = CreateIdHash();
-            WorldLootJson.isStatic = ConfigLooseLootJson.isStatic.Value;
-            WorldLootJson.useGravity = ConfigLooseLootJson.useGravity.Value;
-            WorldLootJson.randomRotation = ConfigLooseLootJson.randomRotation.Value;
-            WorldLootJson.posX = point.x;
-            WorldLootJson.posY = point.y;
-            WorldLootJson.posZ = point.z;
-            WorldLootJson.rotX = 0;
-            WorldLootJson.rotY = 0;
-            WorldLootJson.rotZ = 0;
-            WorldLootJson.isAlwaysSpawn = ConfigLooseLootJson.isAlwaysSpawn.Value;
-            WorldLootJson.isGroupPosition = ConfigLooseLootJson.isGroupPosition.Value;
-
         }
     }
 }

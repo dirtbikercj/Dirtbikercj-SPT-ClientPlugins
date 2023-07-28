@@ -6,53 +6,87 @@ namespace MapTools.Config
     public class Plugin0125 : BaseUnityPlugin
     {
         public static Plugin0125 instance;
-        private const string LootConfig = "Loot Config";
+        private const string SpawnPointCount = "SpawnPointCount";
+        private const string Template = "Template";
+        private const string Items = "Items";
 
         internal void Awake()
         {
             instance = this;
             DontDestroyOnLoad(this);
 
-            ConfigLooseLootJson.id = Config.Bind(
-                LootConfig, "Item ID, LooseLoot.Json",
-                "Loot_ammo",
-                "Type of spawn point, Enter spawn type and a random hash will be generated");
+            ConfigLooseLootJson.mean = Config.Bind(
+                SpawnPointCount,
+                "Spawn point count - mean",
+                0.00f,
+                "");
 
-            ConfigLooseLootJson.probability = Config.Bind(
-                LootConfig,
-                "Probability",
-                0.05f,
-                "Probability this point will be spawned");
+            ConfigLooseLootJson.std = Config.Bind(
+                SpawnPointCount,
+                "Spawn point count - std",
+                0.00f,
+                "");
+
+            ConfigLooseLootJson.id = Config.Bind(
+                Template, 
+                "Item ID, LooseLoot.Json",
+                "Loot_ammo",
+                "Type of spawn point, Enter spawn type and a random identifier will be generated");
 
             ConfigLooseLootJson.isStatic = Config.Bind(
-                LootConfig,
+                Template,
                 "IsStatic",
                 false,
                 "Is this a static spawn?");
 
             ConfigLooseLootJson.useGravity = Config.Bind(
-                LootConfig,
+                Template,
                 "Use Gravity",
                 false,
                 "Does this spawn use gravity?");
 
             ConfigLooseLootJson.randomRotation = Config.Bind(
-                LootConfig,
+                Template,
                 "Random Rotation",
                 false,
                 "Does this spawn use random rotation?");
 
+            ConfigLooseLootJson.probability = Config.Bind(
+                Template,
+                "Probability",
+                0.05f,
+                "Probability this point will be spawned");
+
             ConfigLooseLootJson.isGroupPosition = Config.Bind(
-                LootConfig,
+                Template,
                 "IsGroupPosition",
                 false,
                 "Does this spawn use group positions?");
 
             ConfigLooseLootJson.isAlwaysSpawn = Config.Bind(
-                LootConfig,
+                Template,
                 "Always Spawn",
                 false,
                 "Does this position always spawn?");
+
+            ConfigLooseLootJson.slotId = Config.Bind(
+                Items,
+                "SlotId",
+                "",
+                "");
+
+            ConfigLooseLootJson.stackObjectsCount = Config.Bind(
+                Items,
+                "Stack Object Count",
+                60,
+                "");
+
+            ConfigLooseLootJson.location = Config.Bind(
+                Items,
+                "location",
+                1,
+                "");
+
         }
     }
 }

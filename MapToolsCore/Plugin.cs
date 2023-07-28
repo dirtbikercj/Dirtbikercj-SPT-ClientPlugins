@@ -13,12 +13,12 @@ namespace MapTools
     public class MapTools : BaseUnityPlugin
     {
         public static MapTools instance;
-        public Render renderer;
+        public static Render renderer;
         public WorldLoot worldLoot;
         public GameWorld gameWorldInstance;
-        
+
         public BaseJsonBuilder baseJsonBuilder = new BaseJsonBuilder();
-        public LooseLootJsonBuilder lootJsonBuilder = new LooseLootJsonBuilder();
+        public LooseLootJsonBuilder looseLootJsonBuilder = new LooseLootJsonBuilder();
 
         private const string MainConfig = "Main Settings";
 
@@ -89,6 +89,7 @@ namespace MapTools
             worldLoot = new WorldLoot();
 
             baseJsonBuilder.InitBaseJson();
+            looseLootJsonBuilder.InitLooseLootJson();
         }
 
         internal void Update()
@@ -106,20 +107,20 @@ namespace MapTools
                 // 
                 if (Input.GetKeyDown(ConfigMapTools.setSpawnPoint.Value))
                 {
-                    worldLoot.GetWorldPoint(lootJsonBuilder, renderer);
+                    worldLoot.GetWorldPoint(looseLootJsonBuilder);
                 }
 
                 // Export Looseloot.json
                 if (Input.GetKeyDown(ConfigMapTools.dumpWorldLootJson.Value))
                 {
-                    lootJsonBuilder.ExportLooseLootJson();
+                    looseLootJsonBuilder.ExportLooseLootJson();
                 }
 
                 //Undo last action on looseloot.json
                 if (Input.GetKeyDown(ConfigMapTools.undo.Value))
-                {
-                    //renderer.Undo();
-                    //lootJsonBuilder.Undo();
+                { 
+                    renderer.Undo();
+                    looseLootJsonBuilder.Undo();
                 }
 
                 // Export Base.json
@@ -132,7 +133,7 @@ namespace MapTools
             // Export Looseloot.json
             if (Input.GetKeyDown(ConfigMapTools.dumpWorldLootJson.Value))
             {
-                lootJsonBuilder.ExportLooseLootJson();
+                looseLootJsonBuilder.ExportLooseLootJson();
             }
 
             // Export Base.json

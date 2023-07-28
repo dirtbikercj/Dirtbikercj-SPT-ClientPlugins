@@ -38,6 +38,7 @@ namespace MapTools.Core
 
         public void InitBaseJson()
         {
+            // Convert DateTime to UnixTime
             DateTime datetime = DateTime.Now;
             long unixTime = ((DateTimeOffset)datetime).ToUnixTimeSeconds();
 

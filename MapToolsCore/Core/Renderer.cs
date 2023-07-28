@@ -20,10 +20,9 @@ namespace MapTools.Core
     {
 
         List<Vector3> positions = new List<Vector3>();
-        List<Vector3> positonsRedo = new List<Vector3>();
 
         List<GameObject> sphereObjects = new List<GameObject>();
-        List<GameObject> sphereObjectsRedo = new List<GameObject>();
+
 
         private Color _color = new Color();
 

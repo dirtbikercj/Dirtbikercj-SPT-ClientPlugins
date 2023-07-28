@@ -6,7 +6,7 @@ namespace MapTools.Data.Loot
     {
         public SpawnpointCount spawnpointCount { get; set; }
         public List<SpawnpointsForced> spawnpointsForced { get; set; }
-        public List<Spawnpoint> spawnpoints { get; set; }
+        public List<LooseLootSpawnpoint> spawnpoints = new List<LooseLootSpawnpoint>();
     }
 
     public class ComposedKey
@@ -44,7 +44,7 @@ namespace MapTools.Data.Loot
         public double z { get; set; }
     }
 
-    public class Spawnpoint
+    public class LooseLootSpawnpoint
     {
         public string locationId { get; set; }
         public double probability { get; set; }
@@ -77,7 +77,7 @@ namespace MapTools.Data.Loot
         public List<object> GroupPositions { get; set; }
         public bool IsAlwaysSpawn { get; set; }
         public string Root { get; set; }
-        public List<Item> Items { get; set; }
+        public List<Item> Items = new List<Item>();
     }
 
     public class Upd
