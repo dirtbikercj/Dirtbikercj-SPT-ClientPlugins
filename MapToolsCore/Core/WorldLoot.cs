@@ -4,7 +4,7 @@ using EFT.UI;
 using Comfort.Common;
 using System.Collections.Generic;
 using UnityEngine;
-using MapTools.Helpers;
+using MapTools.Config;
 using MapTools.Core.Base;
 
 namespace MapTools.Core
@@ -54,7 +54,7 @@ namespace MapTools.Core
                     AddLootEntry(hit.point, jsonDump);
                     _renderer.AddSphereToList(hit.point);
 
-                    if (MapToolsConfig.enableLootSpheres.Value == true)
+                    if (ConfigMapTools.enableLootSpheres.Value == true)
                     {
                         _renderer.DrawLootSpheres();
                     }
@@ -69,7 +69,7 @@ namespace MapTools.Core
         private string CreateIdHash()
         {
             var random = new System.Random();
-            string lootId = MapToolsConfig.id.Value + " ";
+            string lootId = ConfigLooseLootJson.id.Value + " ";
             int randNum = random.Next(1000000);
             string key = randNum.ToString("D7");
             lootId += key;
@@ -79,19 +79,19 @@ namespace MapTools.Core
         private void AddLootEntry(Vector3 point, LooseLootJsonBuilder jsonDump)
         {
             WorldLootJson.locationId = $"({point.x}, {point.y}, {point.z})";
-            WorldLootJson.probability = MapToolsConfig.probability.Value;
+            WorldLootJson.probability = ConfigLooseLootJson.probability.Value;
             WorldLootJson.Id = CreateIdHash();
-            WorldLootJson.isStatic = MapToolsConfig.isStatic.Value;
-            WorldLootJson.useGravity = MapToolsConfig.useGravity.Value;
-            WorldLootJson.randomRotation = MapToolsConfig.randomRotation.Value;
+            WorldLootJson.isStatic = ConfigLooseLootJson.isStatic.Value;
+            WorldLootJson.useGravity = ConfigLooseLootJson.useGravity.Value;
+            WorldLootJson.randomRotation = ConfigLooseLootJson.randomRotation.Value;
             WorldLootJson.posX = point.x;
             WorldLootJson.posY = point.y;
             WorldLootJson.posZ = point.z;
             WorldLootJson.rotX = 0;
             WorldLootJson.rotY = 0;
             WorldLootJson.rotZ = 0;
-            WorldLootJson.isAlwaysSpawn = MapToolsConfig.isAlwaysSpawn.Value;
-            WorldLootJson.isGroupPosition = MapToolsConfig.isGroupPosition.Value;
+            WorldLootJson.isAlwaysSpawn = ConfigLooseLootJson.isAlwaysSpawn.Value;
+            WorldLootJson.isGroupPosition = ConfigLooseLootJson.isGroupPosition.Value;
 
         }
     }

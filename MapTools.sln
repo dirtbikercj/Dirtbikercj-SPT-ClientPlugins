@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapTools", "MapToolsCore\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseJsonConfig", "BaseJsonConfig\BaseJsonConfig.csproj", "{9BA1B038-9A35-4CBA-B2CD-DCDE9ABC44B1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LooseLootConfig", "LooseLootConfig\LooseLootConfig.csproj", "{A48870E0-D7A1-4B9F-A811-7E6E2C0307E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9BA1B038-9A35-4CBA-B2CD-DCDE9ABC44B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BA1B038-9A35-4CBA-B2CD-DCDE9ABC44B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BA1B038-9A35-4CBA-B2CD-DCDE9ABC44B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A48870E0-D7A1-4B9F-A811-7E6E2C0307E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A48870E0-D7A1-4B9F-A811-7E6E2C0307E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A48870E0-D7A1-4B9F-A811-7E6E2C0307E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A48870E0-D7A1-4B9F-A811-7E6E2C0307E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

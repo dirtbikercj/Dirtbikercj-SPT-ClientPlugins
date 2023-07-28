@@ -1,4 +1,4 @@
-﻿using MapTools.Helpers;
+﻿using MapTools.Config;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,7 +49,7 @@ namespace MapTools.Core
             sphereObj.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
             var sphereRenderer = sphereObj.GetComponent<Renderer>();
 
-            switch (MapToolsConfig.lootColor.Value)
+            switch (ConfigMapTools.lootColor.Value)
             {
                 case Colors.Red:
                     _color = Color.red;

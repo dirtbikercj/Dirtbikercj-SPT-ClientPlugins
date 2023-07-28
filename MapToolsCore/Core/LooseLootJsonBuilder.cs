@@ -1,12 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using EFT.UI;
 using System.IO;
-using MapTools.Core.Base;
 using MapTools.Data.Loot;
-using MapTools.Data.Base;
 
 namespace MapTools.Core
 {
@@ -19,14 +15,16 @@ namespace MapTools.Core
             _looseLootJson.spawnpointCount = new SpawnpointCount();
             _looseLootJson.spawnpointsForced = new List<SpawnpointsForced>();
             _looseLootJson.spawnpoints = new List<Spawnpoint>();
+
+            BuildBaseJson();
         }
 
-        public void Build_baseJson()
+        public void BuildBaseJson()
         {
             _looseLootJsonExport = JsonConvert.SerializeObject(_looseLootJson, Formatting.Indented);
         }
 
-        public void ExportJson()
+        public void ExportLooseLootJson()
         {
             using (StreamWriter file = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + @"\looseloot.json"))
             using (JsonWriter writer = new JsonTextWriter(file))

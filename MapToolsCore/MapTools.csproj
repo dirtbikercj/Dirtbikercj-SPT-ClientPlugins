@@ -67,6 +67,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\BaseJsonConfig\BaseJsonConfig.csproj" />
+    <ProjectReference Include="..\LooseLootConfig\LooseLootConfig.csproj" />
   </ItemGroup>
   
   <ItemGroup>
