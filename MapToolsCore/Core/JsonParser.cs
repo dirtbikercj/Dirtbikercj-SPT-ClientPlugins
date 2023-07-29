@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,13 +32,47 @@ namespace MapTools.Core
             }
         }
 
-        public void SearchForItem(string searchId)
+        string nextParent = string.Empty;
+        int parentCount = 0;
+        private bool refire = false;
+        public void SearchForItem(string searchId = "", bool searchParents = true)
         {
+
             foreach (var item in _itemData.Values)
             {
-                if (item._id == searchId)
+                if (item._id == searchId && refire == false)
                 {
-                    ConsoleScreen.Log(item._name);
+                    ConsoleScreen.Log("----------Searched Object------------");
+                    ConsoleScreen.Log($"Item name: {item._name}");
+                    ConsoleScreen.Log($"ParentID:  {item?._parent}");
+                    ConsoleScreen.Log("-------------------------------------");
+                    nextParent = item._parent;
+                }
+
+                if (nextParent != string.Empty)
+                {
+                    foreach (var parent in _itemData.Values)
+                    {
+                        if (parent._id == nextParent)
+                        {
+                            parentCount++;
+                            ConsoleScreen.Log($"---Parent: {parentCount} ------------------");
+                            ConsoleScreen.Log($"Item name: {parent._name}");
+                            ConsoleScreen.Log($"ParentID:  {parent?._parent}");
+                            ConsoleScreen.Log("-------------------------------");
+                            nextParent = parent._parent;
+                            if (nextParent == "")
+                            {
+                                refire = false;
+                                parentCount = 0;
+                            }
+                            else
+                            {
+                                refire = true;
+                                SearchForItem();
+                            }
+                        }
+                    }
                 }
             }
         }

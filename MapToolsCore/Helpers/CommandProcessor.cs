@@ -25,13 +25,24 @@ namespace MapTools.Helpers
     public class Commands
     {
         [ConsoleCommand("SearchItem", "", null, "", new string[] { })]
-        public static void SearchItem([ConsoleArgument("", "Search for an item by ID")] string item)
+        public static void SearchItem([ConsoleArgument("", "Search for an item by ID")] string[] item)
         {
-            if (item != "")
+            if (item[0] != "")
             {
                 try
                 {
-                    MapTools.instance.jsonParser.SearchForItem(item);
+                    MapTools.instance.jsonParser.SearchForItem(item[0], true);
+                }
+                catch (Exception e)
+                {
+                    ConsoleScreen.LogException(e);
+                }
+            }
+            else if (item[1] == "true")
+            {
+                try
+                {
+                    MapTools.instance.jsonParser.SearchForItem(item[0], true);
                 }
                 catch (Exception e)
                 {
