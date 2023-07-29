@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace MapTools.Data.Loot
 {
-    internal class ItemsJsonData
+    public class ItemsJsonData
     {
         public class Root
         {
@@ -22,7 +22,7 @@ namespace MapTools.Data.Loot
             public string _parent { get; set; }
 
             // Properties
-            //public Props _props { get; set; }
+            public Props _props { get; set; }
 
             // Type of container, by ID
             public string _proto { get; set; }
@@ -158,7 +158,7 @@ namespace MapTools.Data.Loot
             public int? Width { get; set; }
             public bool? AdjustCollimatorsToTrajectory { get; set; }
             public double? AimPlane { get; set; }
-            public double? AimSensitivity { get; set; }
+            public dynamic? AimSensitivity { get; set; }
             public bool? AllowFeed { get; set; }
             public bool? AllowJam { get; set; }
             public bool? AllowMisfire { get; set; }
