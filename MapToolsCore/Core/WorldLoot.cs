@@ -3,6 +3,7 @@ using EFT;
 using EFT.UI;
 using Comfort.Common;
 using System.Collections.Generic;
+using BSG.CameraEffects;
 using UnityEngine;
 using MapTools.Config;
 using MapTools.Core.Base;
@@ -42,6 +43,7 @@ namespace MapTools.Core
                 Vector3 mousePos = Input.mousePosition;
                 RaycastHit hit;
                 Ray worldPos = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
 
                 if (!Physics.Raycast(worldPos, out hit))
                 {

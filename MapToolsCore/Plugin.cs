@@ -2,9 +2,10 @@
 using MapTools.Core;
 using Comfort.Common;
 using EFT;
+using EFT.UI;
 using UnityEngine;
 using MapTools.Config;
-
+using MapTools.Helpers;
 
 
 namespace MapTools
@@ -14,8 +15,10 @@ namespace MapTools
     {
         public static MapTools instance;
         public static Render renderer;
+        public JsonParser jsonParser;
         public WorldLoot worldLoot;
         public GameWorld gameWorldInstance;
+        public CommandProcessor commandProcessor;
 
         public BaseJsonBuilder baseJsonBuilder = new BaseJsonBuilder();
         public LooseLootJsonBuilder looseLootJsonBuilder = new LooseLootJsonBuilder();
@@ -26,6 +29,8 @@ namespace MapTools
         {
             instance = this;
             DontDestroyOnLoad(this);
+
+            ConsoleScreen.Processor.RegisterCommandGroup<Commands>();
 
             #region MainSettings
             ConfigMapTools.logAllLoot = Config.Bind(
@@ -77,23 +82,24 @@ namespace MapTools
                 "Undoes last action");
 
             #endregion
-
-
-            
-
         }
 
         internal void Start()
         {
             renderer = new Render();
             worldLoot = new WorldLoot();
+            commandProcessor = new CommandProcessor();
+            jsonParser = new JsonParser();
 
             baseJsonBuilder.InitBaseJson();
             looseLootJsonBuilder.InitLooseLootJson();
+            commandProcessor.RegisterCommandProcessor();
         }
 
         internal void Update()
         {
+            GameObject nightvision;
+
             if (Singleton<GameWorld>.Instantiated)
             {
                 gameWorldInstance = Singleton<GameWorld>.Instance;

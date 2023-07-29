@@ -6,6 +6,7 @@ namespace MapTools.Config
 {
     public static class ConfigMapTools
     {
+        public static ConfigEntry<KeyCode> menu;
 
         public static ConfigEntry<KeyCode> logAllLoot;
         public static ConfigEntry<KeyCode> setSpawnPoint;

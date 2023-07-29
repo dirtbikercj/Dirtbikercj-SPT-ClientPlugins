@@ -55,6 +55,9 @@
 	  <Reference Include="ConfigurationManager">
 		  <HintPath>$(SolutionDir)dependencies\ConfigurationManager.dll</HintPath>
 	  </Reference>
+	  <Reference Include="Unity.TextMeshPro">
+		  <HintPath>$(SolutionDir)dependencies\Unity.TextMeshPro.dll</HintPath>
+	  </Reference>
 
 
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

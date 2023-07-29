@@ -29,6 +29,12 @@ namespace MapTools.Core
             BuildBaseJson();
         }
 
+
+
+        // first tpl is the actual ammobox id as found in items.json
+        // Second tpl is the ammo in the box
+        // Count in this context is the amount of ammo in the box
+
         public void AddLooseLootPoint(Vector3 hitpoint)
         {
             Random rand = new Random();
@@ -47,12 +53,12 @@ namespace MapTools.Core
             rotation.y = 0;
             rotation.z = 0;
 
-            upd.StackObjectsCount = 50;
+            upd.StackObjectsCount = 50;                                      // Only applies to ammo
 
-            item._id = rand.Next(-1000000000, 1000000000).ToString();
-            item._tpl = CreateIdString(24);
+            item._id = rand.Next(-1000000000, 1000000000).ToString();        // Random ID
+            item._tpl = CreateIdString(24);                            // Item ID or ContainerID
             item.parentId = rand.Next(-1000000000, 1000000000).ToString();
-            item.slotId = ConfigLooseLootJson.slotId.Value; //Fix me
+            item.slotId = ConfigLooseLootJson.slotId.Value;                 //Always cartridges when ammo box spawn
             item.upd = upd;
             item.location = ConfigLooseLootJson.location.Value;
 
