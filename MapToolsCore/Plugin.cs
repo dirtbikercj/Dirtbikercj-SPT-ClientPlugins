@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using System.Threading.Tasks;
+using BepInEx;
 using MapTools.Core;
 using Comfort.Common;
 using EFT;
@@ -32,7 +33,6 @@ namespace MapTools
 
             ConsoleScreen.Processor.RegisterCommandGroup<Commands>();
 
-            #region MainSettings
             ConfigMapTools.logAllLoot = Config.Bind(
                MainConfig,
                 "Log all spawned loot to console",
@@ -80,8 +80,6 @@ namespace MapTools
                 "Set lootsphere color",
                 Colors.Red,
                 "Undoes last action");
-
-            #endregion
         }
 
         internal void Start()
@@ -91,6 +89,7 @@ namespace MapTools
             commandProcessor = new CommandProcessor();
             jsonParser = new JsonParser();
 
+            jsonParser.LoadItemJsonFromDisk();
             baseJsonBuilder.InitBaseJson();
             looseLootJsonBuilder.InitLooseLootJson();
             commandProcessor.RegisterCommandProcessor();
@@ -98,8 +97,6 @@ namespace MapTools
 
         internal void Update()
         {
-            GameObject nightvision;
-
             if (Singleton<GameWorld>.Instantiated)
             {
                 gameWorldInstance = Singleton<GameWorld>.Instance;

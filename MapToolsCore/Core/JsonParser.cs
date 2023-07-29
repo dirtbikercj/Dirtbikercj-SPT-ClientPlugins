@@ -2,23 +2,27 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using EFT.UI;
-using MapTools.Data.Loot;
+using MapTools.Data;
 
 namespace MapTools.Core
 {
     public class JsonParser
     {
         Dictionary<string, ItemsJsonData.Root> _itemData = new Dictionary<string, ItemsJsonData.Root>();
+        Dictionary<string, string> _localeData = new Dictionary<string, string>();
 
         public void LoadItemJsonFromDisk()
         {
             try
-            {
-                string _itemJsonString = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\Aki_Data\Server\database\templates\items.json");
-                _itemData = JsonConvert.DeserializeObject<Dictionary<string, ItemsJsonData.Root>> (_itemJsonString);
-
-                ConsoleScreen.Log($"Items Loaded from disk: {_itemData.Count}");
+            { 
+                string itemJsonString = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory +
+                                                       @"\Aki_Data\Server\database\templates\items.json");
+                string localejsonString = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory +
+                                                               @"\Aki_Data\Server\database\locales\global\en.json");
+                _itemData = JsonConvert.DeserializeObject<Dictionary<string, ItemsJsonData.Root>>(itemJsonString);
+                _localeData = JsonConvert.DeserializeObject<Dictionary<string, string>>(localejsonString);
             }
             catch (Exception e)
             {
@@ -36,8 +40,9 @@ namespace MapTools.Core
             {
                 if (item._id == searchId && _refire == false)
                 {
+                    _localeData.TryGetValue(searchId + " Name", out string name);
                     ConsoleScreen.Log("----------Searched Object------------");
-                    ConsoleScreen.Log($"Item name: {item._name}");
+                    ConsoleScreen.Log($"Item name: {name}");
                     ConsoleScreen.Log($"ParentID:  {item?._parent}");
                     ConsoleScreen.Log("-------------------------------------");
                     _nextParent = item._parent;
@@ -50,10 +55,10 @@ namespace MapTools.Core
                         if (parent._id == _nextParent)
                         {
                             _parentCount++;
-                            ConsoleScreen.Log($"---Parent: {_parentCount} ------------------");
+                            ConsoleScreen.Log($"----------Parent: {_parentCount} ------------------");
                             ConsoleScreen.Log($"Item name: {parent._name}");
                             ConsoleScreen.Log($"ParentID:  {parent?._parent}");
-                            ConsoleScreen.Log("-------------------------------");
+                            ConsoleScreen.Log("--------------------------------------");
                             _nextParent = parent._parent;
                             if (_nextParent == "")
                             {

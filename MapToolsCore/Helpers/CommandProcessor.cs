@@ -16,9 +16,6 @@ namespace MapTools.Helpers
             // Lists all loot in the gameworld
             ConsoleScreen.Processor.RegisterCommand("ListAllLoot",
                 delegate() { MapTools.instance.worldLoot.ListAllLoot(MapTools.instance.gameWorldInstance); });
-
-            ConsoleScreen.Processor.RegisterCommand("LoadItemJson",
-                delegate () { MapTools.instance.jsonParser.LoadItemJsonFromDisk(); });
         }
     }
 
@@ -31,7 +28,7 @@ namespace MapTools.Helpers
             {
                 try
                 {
-                    MapTools.instance.jsonParser.SearchForItem(item[0], true);
+                    MapTools.instance.jsonParser.SearchForItem(item[0]);
                 }
                 catch (Exception e)
                 {
@@ -42,7 +39,7 @@ namespace MapTools.Helpers
             {
                 try
                 {
-                    MapTools.instance.jsonParser.SearchForItem(item[0], true);
+                    MapTools.instance.jsonParser.SearchForItem(item[0]);
                 }
                 catch (Exception e)
                 {

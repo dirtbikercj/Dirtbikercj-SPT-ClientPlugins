@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace MapTools.Data.Loot
+namespace MapTools.Data
 {
     public class ItemsJsonData
     {
@@ -158,7 +158,7 @@ namespace MapTools.Data.Loot
             public int? Width { get; set; }
             public bool? AdjustCollimatorsToTrajectory { get; set; }
             public double? AimPlane { get; set; }
-            public dynamic? AimSensitivity { get; set; }
+            public dynamic AimSensitivity { get; set; }
             public bool? AllowFeed { get; set; }
             public bool? AllowJam { get; set; }
             public bool? AllowMisfire { get; set; }
