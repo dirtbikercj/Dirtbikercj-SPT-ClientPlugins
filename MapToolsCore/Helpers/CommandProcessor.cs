@@ -1,7 +1,6 @@
 ﻿using System;
 using EFT.UI;
 using EFT.Console.Core;
-using JetBrains.Annotations;
 
 namespace MapTools.Helpers
 {

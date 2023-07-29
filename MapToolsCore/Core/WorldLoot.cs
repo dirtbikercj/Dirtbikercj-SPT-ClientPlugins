@@ -3,10 +3,8 @@ using EFT;
 using EFT.UI;
 using Comfort.Common;
 using System.Collections.Generic;
-using BSG.CameraEffects;
 using UnityEngine;
 using MapTools.Config;
-using MapTools.Core.Base;
 
 namespace MapTools.Core
 {
