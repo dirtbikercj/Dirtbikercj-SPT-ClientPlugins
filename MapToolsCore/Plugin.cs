@@ -13,15 +13,16 @@ namespace MapTools
     [BepInPlugin("com.dirtbikercj.maptools", "Map Tools", "1.0.0")]
     public class MapTools : BaseUnityPlugin
     {
+        //Instances
         public static MapTools instance;
         public static Render renderer;
         public JsonParser jsonParser;
         public WorldLoot worldLoot;
         public GameWorld gameWorldInstance;
         public CommandProcessor commandProcessor;
+        public BaseJsonBuilder baseJsonBuilder;
+        public LooseLootJsonBuilder looseLootJsonBuilder;
 
-        public BaseJsonBuilder baseJsonBuilder = new BaseJsonBuilder();
-        public LooseLootJsonBuilder looseLootJsonBuilder = new LooseLootJsonBuilder();
 
         private const string MainConfig = "Main Settings";
 
@@ -87,6 +88,11 @@ namespace MapTools
             worldLoot = new WorldLoot();
             commandProcessor = new CommandProcessor();
             jsonParser = new JsonParser();
+            baseJsonBuilder = new BaseJsonBuilder();
+            looseLootJsonBuilder = new LooseLootJsonBuilder();
+
+
+
 
             jsonParser.LoadItemJsonFromDisk();
             baseJsonBuilder.InitBaseJson();

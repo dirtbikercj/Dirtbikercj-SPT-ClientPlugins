@@ -1,10 +1,13 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 using EFT;
 using EFT.UI;
 using Comfort.Common;
 using System.Collections.Generic;
+using EFT.InventoryLogic;
 using UnityEngine;
 using MapTools.Config;
+using MapTools.Data;
 
 namespace MapTools.Core
 {
@@ -12,6 +15,9 @@ namespace MapTools.Core
     public class WorldLoot
     {
         private readonly Render _renderer = MapTools.renderer;
+
+        private string _itemToSpawnId;
+
         public void ListAllLoot(GameWorld gameWorldInstance)
         {
             List<LootItemPositionClass> allLoot = AccessTools.Field(typeof(GameWorld), "AllLoot").GetValue(gameWorldInstance) as List<LootItemPositionClass>;

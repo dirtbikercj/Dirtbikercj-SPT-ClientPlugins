@@ -34,17 +34,6 @@ namespace MapTools.Helpers
                     ConsoleScreen.LogException(e);
                 }
             }
-            else if (item[1] == "true")
-            {
-                try
-                {
-                    MapTools.instance.jsonParser.SearchForItem(item[0]);
-                }
-                catch (Exception e)
-                {
-                    ConsoleScreen.LogException(e);
-                }
-            }
         }
     }
 }

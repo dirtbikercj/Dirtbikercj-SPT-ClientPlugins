@@ -9,8 +9,8 @@ namespace MapTools.Core
 {
     public class JsonParser
     {
-        Dictionary<string, ItemsJsonData.Root> _itemData = new Dictionary<string, ItemsJsonData.Root>();
-        Dictionary<string, string> _localeData = new Dictionary<string, string>();
+        public Dictionary<string, ItemsJsonData.Root> _itemData = new Dictionary<string, ItemsJsonData.Root>();
+        public Dictionary<string, string> _localeData = new Dictionary<string, string>();
 
         public void LoadItemJsonFromDisk()
         {
