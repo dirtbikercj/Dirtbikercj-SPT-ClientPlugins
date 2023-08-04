@@ -186,7 +186,7 @@ namespace MapTools.Core
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
             return new string(Enumerable.Repeat(chars, 24)
-                .Select(s => s[_random.Next(s.Length)]).ToArray());
+                .Select(s => s[_random.Next(s.Length)]).ToArray()).ToLower();
         }
         
         public void ExportBaseJson()

@@ -60,7 +60,7 @@ namespace MapTools.Core
                     MapTools.instance.looseLootJsonBuilder.AddLooseLootPoint(hit.point);
                     _renderer.AddSphereToList(hit.point);
 
-                    if (ConfigMapTools.enableLootSpheres.Value == true)
+                    if (ConfigMapTools.enableLootSpheres.Value)
                     {
                         _renderer.DrawLootSpheres();
                     }
