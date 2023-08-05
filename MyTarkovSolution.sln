@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleaAccess", "FleaAccess\Fl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSettings", "GameSettings\GameSettings.csproj", "{A17EB877-A41B-468A-B8A0-93C33ACE2764}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseItemsFromAnywhere", "UseItemsFromAnywhere\UseItemsFromAnywhere.csproj", "{F2CDB53E-10DD-462E-A13B-713002A99769}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapToolsPlugins", "MapToolsPlugins", "{8E096590-5FF7-402E-82CA-C058FD5426C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,18 @@ Global
 		{A17EB877-A41B-468A-B8A0-93C33ACE2764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A17EB877-A41B-468A-B8A0-93C33ACE2764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A17EB877-A41B-468A-B8A0-93C33ACE2764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2CDB53E-10DD-462E-A13B-713002A99769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2CDB53E-10DD-462E-A13B-713002A99769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2CDB53E-10DD-462E-A13B-713002A99769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2CDB53E-10DD-462E-A13B-713002A99769}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E58AF5A2-5C09-4728-9C55-D83B2A4EBD67} = {8E096590-5FF7-402E-82CA-C058FD5426C5}
+		{9BA1B038-9A35-4CBA-B2CD-DCDE9ABC44B1} = {8E096590-5FF7-402E-82CA-C058FD5426C5}
+		{A48870E0-D7A1-4B9F-A811-7E6E2C0307E2} = {8E096590-5FF7-402E-82CA-C058FD5426C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F50D3E67-3AD3-49F9-9AC1-819AA1993E9F}
