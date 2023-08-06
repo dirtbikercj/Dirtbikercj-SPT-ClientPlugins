@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using Aki.Reflection.Patching;
 using EFT.InventoryLogic;
@@ -36,14 +35,12 @@ namespace UseItemsFromAnywhere
 
         private sealed class SlotHelper
         {
+            public Slot parentSlot;
+
             internal bool GetParentSlot(Slot slot)
             {
                 return slot == parentSlot;
             }
-
-            public InventoryControllerClass inventoryClass;
-
-            public Slot parentSlot;
         }
 
         public class IsAtBindablePlace : ModulePatch
