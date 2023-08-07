@@ -35,9 +35,7 @@ namespace UseItemsFromAnywhere
 
         private sealed class SlotHelper
         {
-            public Slot parentSlot;
-
-            public InventoryControllerClass inventoryClass;
+            public required Slot parentSlot;
 
             internal bool GetParentSlot(Slot slot)
             {
@@ -61,7 +59,7 @@ namespace UseItemsFromAnywhere
                 const string whiteFlare = "62178be9d0050232da3485d9";
 
                 InventoryClass inventory =
-                    AccessTools.Property(typeof(InventoryControllerClass), "Inventory").GetValue(__instance) as InventoryClass;
+                    (InventoryClass)AccessTools.Property(typeof(InventoryControllerClass), "Inventory").GetValue(__instance);
 
                 if (item.CurrentAddress != null && !(item.Parent is GClass2664) && item.CurrentAddress.Container.ParentItem is not StashClass)
                 {

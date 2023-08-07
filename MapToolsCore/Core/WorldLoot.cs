@@ -20,7 +20,7 @@ namespace MapTools.Core
 
         public void ListAllLoot(GameWorld gameWorldInstance)
         {
-            List<LootItemPositionClass> allLoot = AccessTools.Field(typeof(GameWorld), "AllLoot").GetValue(gameWorldInstance) as List<LootItemPositionClass>;
+            List<LootItemPositionClass> allLoot = (List<LootItemPositionClass>)AccessTools.Field(typeof(GameWorld), "AllLoot").GetValue(gameWorldInstance);
             int lootcount = 0;
 
             foreach (var result in allLoot)

@@ -22,16 +22,12 @@ namespace SPC
             new MenuTaskBarPatch().Enable();
             new OnScreenChangedPatch().Enable();
             new FleaTraderScreenPatch().Enable();
-            //new GlobalsPatch().Enable();
+            new OfferViewPatch().Enable();
         }
 
         internal void Update()
         {
-            if (!Singleton<BackendDummyClass.GClass1802>.Instantiated)
-                return;
-            
-            var setter = AccessTools.PropertySetter(typeof(RagFairClass), nameof(RagFairClass.Status));
-            setter.Invoke(Singleton<BackendDummyClass.GClass1802>.Instance.RagFair, new object[] { ERagFairStatus.Disabled });
+          
         }
     }
 }
