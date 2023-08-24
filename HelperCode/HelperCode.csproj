@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-	  <AssemblyName>FleaAccess</AssemblyName>
-	  <Description>SPC-Core module</Description>
+	  <AssemblyName>Helper Code</AssemblyName>
+	  <Description>Helper Functions</Description>
 	  <Version>1.0.0</Version>
 	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	  <LangVersion>latest</LangVersion>
@@ -66,10 +66,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HelperCode\HelperCode.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Update="Properties\Settings.Designer.cs">
 			<DesignTimeSharedInput>True</DesignTimeSharedInput>
 			<AutoGen>True</AutoGen>
@@ -85,7 +81,7 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;G:\3.6.1 - Dev\BepInEx\plugins\$(TargetName).dll&quot;&#xD;&#xA;if $(ConfigurationName) == Debug (&#xD;&#xA;    copy &quot;$(ProjectDir)$(OutDir)$(TargetName).pdb&quot; &quot;G:\3.6.1 - Dev\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;) else (&#xD;&#xA;    del &quot;G:\3.6.1 - Dev\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;del &quot;G:\3.6.1 - Dev\BepInEx\config\com.dirtbikercj.looselootgenerator.cfg&quot;" />
+		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;G:\3.6.0 - Dev\BepInEx\plugins\$(TargetName).dll&quot;&#xD;&#xA;if $(ConfigurationName) == Debug (&#xD;&#xA;    copy &quot;$(ProjectDir)$(OutDir)$(TargetName).pdb&quot; &quot;G:\3.6.0 - Dev\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;) else (&#xD;&#xA;    del &quot;G:\3.6.0 - Dev\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;del &quot;G:\3.6.0 - Dev\BepInEx\config\com.dirtbikercj.template.cfg&quot;" />
 	</Target>
 
 

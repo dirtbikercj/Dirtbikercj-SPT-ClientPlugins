@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseItemsFromAnywhere", "Use
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapToolsPlugins", "MapToolsPlugins", "{8E096590-5FF7-402E-82CA-C058FD5426C5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperCode", "HelperCode\HelperCode.csproj", "{39FACC78-0450-4CB6-A2DC-19C4F5DFB431}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{F2CDB53E-10DD-462E-A13B-713002A99769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2CDB53E-10DD-462E-A13B-713002A99769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2CDB53E-10DD-462E-A13B-713002A99769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FACC78-0450-4CB6-A2DC-19C4F5DFB431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FACC78-0450-4CB6-A2DC-19C4F5DFB431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FACC78-0450-4CB6-A2DC-19C4F5DFB431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FACC78-0450-4CB6-A2DC-19C4F5DFB431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

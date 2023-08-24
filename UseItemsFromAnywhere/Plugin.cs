@@ -12,8 +12,8 @@ namespace UseItemsFromAnywhere
             instance = this;
             DontDestroyOnLoad(this);
 
-            new UseItemsFromAnywhere.IsAtBindablePlace().Enable();
-            new UseItemsFromAnywhere.IsAtReachablePlace().Enable();
+            new IsAtBindablePlace().Enable();
+            new IsAtReachablePlace().Enable();
         }
     }
 }

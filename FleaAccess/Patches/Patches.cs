@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Aki.Reflection.Patching;
+﻿using Aki.Reflection.Patching;
 using Comfort.Common;
 using EFT;
 using EFT.UI;
 using EFT.UI.Ragfair;
 using EFT.UI.Screens;
 using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
-
 
 namespace FleaAccess.Patches
 {
@@ -19,24 +18,22 @@ namespace FleaAccess.Patches
             typeof(TradingScreen).GetMethod("method_5", BindingFlags.NonPublic | BindingFlags.Instance);
 
         [PatchPostfix]
-        static void Postfix()
+        private static void Postfix()
         {
             TradingScreen _menuTaskBarInstance = MonoBehaviourSingleton<MenuUI>.Instance.TradingScreen;
             UIAnimatedToggleSpawner _ragfairToggle = (UIAnimatedToggleSpawner)AccessTools.Field(typeof(TradingScreen), "_ragfairToggle").GetValue(_menuTaskBarInstance);
 
-
             _ragfairToggle.SetActive(false);
-
         }
     }
 
     public class MenuTaskBarPatch : ModulePatch
     {
-        protected override MethodBase GetTargetMethod() => 
+        protected override MethodBase GetTargetMethod() =>
             typeof(MenuTaskBar).GetMethod("SetButtonsAvailable", BindingFlags.Public | BindingFlags.Instance);
 
         [PatchPostfix]
-        static void PostFix(ref bool available)
+        private static void PostFix(ref bool available)
         {
             MenuTaskBar _menuTaskBarInstance = MonoBehaviourSingleton<PreloaderUI>.Instance.MenuTaskBar;
             Dictionary<EMenuType, HoverTooltipArea> _hoverToolTipAreas = (Dictionary<EMenuType, HoverTooltipArea>)AccessTools.Field(typeof(MenuTaskBar), "_hoverTooltipAreas").GetValue(_menuTaskBarInstance);
@@ -45,37 +42,20 @@ namespace FleaAccess.Patches
 
             AccessTools.Field(typeof(MenuTaskBar), "bool_1").SetValue(_menuTaskBarInstance, false);
 
-            if (true)
+            foreach (KeyValuePair<EMenuType, HoverTooltipArea> keyValuePair in _hoverToolTipAreas)
             {
-                foreach (KeyValuePair<EMenuType, HoverTooltipArea> keyValuePair in _hoverToolTipAreas)
-                {
-                    keyValuePair.Deconstruct(out EMenuType emenuType, out HoverTooltipArea hoverTooltipArea);
-                    int num = (int)emenuType;
+                keyValuePair.Deconstruct(out EMenuType emenuType, out HoverTooltipArea hoverTooltipArea);
+                int num = (int)emenuType;
 
-                    if (num == 13)
-                    {
-                        hoverTooltipArea.SetUnlockStatus(false);
-                        hoverTooltipArea.SetMessageText("Requires a flea access card", false);
-                    }
-                    else if (num != 6 && (num != 10 || bool_0))
-                    {
-                        hoverTooltipArea.SetUnlockStatus(available);
-                        hoverTooltipArea.SetMessageText(available ? string.Empty : "Not available in raid", false);
-                    }
+                if (num == 13)
+                {
+                    hoverTooltipArea.SetUnlockStatus(false);
+                    hoverTooltipArea.SetMessageText("Requires a flea access card", false);
                 }
-            }
-            else
-            {
-                foreach (KeyValuePair<EMenuType, HoverTooltipArea> keyValuePair in _hoverToolTipAreas)
+                else if (num != 6 && (num != 10 || bool_0))
                 {
-                    keyValuePair.Deconstruct(out EMenuType emenuType, out HoverTooltipArea hoverTooltipArea);
-                    int num = (int)emenuType;
-
-                    ; if (num != 6 && (num != 10 || bool_0))
-                    {
-                        hoverTooltipArea.SetUnlockStatus(available);
-                        hoverTooltipArea.SetMessageText(available ? string.Empty : "Not available in raid", false);
-                    }
+                    hoverTooltipArea.SetUnlockStatus(available);
+                    hoverTooltipArea.SetMessageText(available ? string.Empty : "Not available in raid", false);
                 }
             }
         }
@@ -105,14 +85,13 @@ namespace FleaAccess.Patches
             typeof(OfferView).GetMethod("method_0", BindingFlags.Instance | BindingFlags.NonPublic);
 
         [PatchPrefix]
-        static void Prefix(OfferView __instance)
+        private static void Prefix(OfferView __instance)
         {
             //Fields
             Offer offer_0 = (Offer)AccessTools.Field(typeof(OfferView), "Offer_0").GetValue(__instance);
             GameObject checkboxPanel = (GameObject)AccessTools.Field(typeof(OfferView), "Offer_0").GetValue(__instance);
             bool boolean_2 = (bool)AccessTools.Field(typeof(OfferView), "Boolean_2").GetValue(__instance);
             GameObject exchangeOffer = (GameObject)AccessTools.Field(typeof(OfferView), "_exchangeOffer").GetValue(__instance);
-
 
             call(__instance, "method_5", new object[] { offer_0.Id, true });
             call(__instance, "method_7");
@@ -133,12 +112,11 @@ namespace FleaAccess.Patches
 
     public class OnScreenChangedPatch : ModulePatch
     {
-
-        protected override MethodBase GetTargetMethod() => 
+        protected override MethodBase GetTargetMethod() =>
             typeof(MenuTaskBar).GetMethod("OnScreenChanged", BindingFlags.Public | BindingFlags.Instance);
 
         [PatchPostfix]
-        static void PostFix(ref EEftScreenType eftScreenType)
+        private static void PostFix(ref EEftScreenType eftScreenType)
         {
             MenuTaskBar _menuTaskBarInstance = MonoBehaviourSingleton<PreloaderUI>.Instance.MenuTaskBar;
             Dictionary<EEftScreenType, EMenuType> _screenType = (Dictionary<EEftScreenType, EMenuType>)AccessTools.Field(typeof(MenuTaskBar), "dictionary_0").GetValue(_menuTaskBarInstance);

@@ -59,7 +59,6 @@
 
 
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="UnityEngine.Modules" Version="2019.4.39" IncludeAssets="compile" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -82,7 +81,7 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;G:\3.6.0 - Dev\BepInEx\plugins\GameSettings\$(TargetName).dll&quot;&#xD;&#xA;if $(ConfigurationName) == Debug (&#xD;&#xA;    copy &quot;$(ProjectDir)$(OutDir)$(TargetName).pdb&quot; &quot;G:\3.6.0 - Dev\BepInEx\plugins\GameSettings\$(TargetName).pdb&quot;&#xD;&#xA;) else (&#xD;&#xA;    del &quot;G:\3.6.0 - Dev\BepInEx\plugins\GameSettings\$(TargetName).pdb&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;del &quot;G:\3.6.0 - Dev\BepInEx\config\com.dirtbikercj.Gamesettings.cfg&quot;" />
+		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;G:\3.6.1 - Dev\BepInEx\plugins\GameSettings\$(TargetName).dll&quot;&#xD;&#xA;if $(ConfigurationName) == Debug (&#xD;&#xA;    copy &quot;$(ProjectDir)$(OutDir)$(TargetName).pdb&quot; &quot;G:\3.6.1 - Dev\BepInEx\plugins\GameSettings\$(TargetName).pdb&quot;&#xD;&#xA;) else (&#xD;&#xA;    del &quot;G:\3.6.1 - Dev\BepInEx\plugins\GameSettings\$(TargetName).pdb&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;del &quot;G:\3.6.1 - Dev\BepInEx\config\com.dirtbikercj.Gamesettings.cfg&quot;" />
 	</Target>
 
 
