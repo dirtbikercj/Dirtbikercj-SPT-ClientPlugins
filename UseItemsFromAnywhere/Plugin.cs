@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using static UseItemsFromAnywhere.UseItemsFromAnywhere;
 
 namespace UseItemsFromAnywhere
 {
