@@ -1,9 +1,10 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using static UseItemsFromAnywhere.UseItemsFromAnywhere;
 
 namespace UseItemsFromAnywhere
 {
-    [BepInPlugin("com.dirtbikercj.useFromAnywhere", "Use items from any place in your inventory", "1.0.2")]
+    [BepInPlugin("com.dirtbikercj.useFromAnywhere", "Use items from any place in your inventory", "1.0.3")]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin instance;

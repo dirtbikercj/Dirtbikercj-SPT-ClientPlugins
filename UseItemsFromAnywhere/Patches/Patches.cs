@@ -1,5 +1,6 @@
 ﻿using Aki.Reflection.Patching;
 using EFT.InventoryLogic;
+using EFT.UI;
 using HarmonyLib;
 using System.Linq;
 using System.Reflection;
@@ -8,40 +9,6 @@ namespace UseItemsFromAnywhere
 {
     public class UseItemsFromAnywhere
     {
-        private static readonly EquipmentSlot[] FastAccessSlots = new EquipmentSlot[]
-        {
-            EquipmentSlot.FirstPrimaryWeapon,
-            EquipmentSlot.SecondPrimaryWeapon,
-            EquipmentSlot.Holster,
-            EquipmentSlot.Scabbard,
-            EquipmentSlot.Pockets,
-            EquipmentSlot.TacticalVest,
-            EquipmentSlot.Backpack,
-            EquipmentSlot.SecuredContainer
-        };
-
-        private static readonly EquipmentSlot[] BindAvailableSlotsExtended = new EquipmentSlot[]
-        {
-            EquipmentSlot.FirstPrimaryWeapon,
-            EquipmentSlot.SecondPrimaryWeapon,
-            EquipmentSlot.Holster,
-            EquipmentSlot.Scabbard,
-            EquipmentSlot.Pockets,
-            EquipmentSlot.TacticalVest,
-            EquipmentSlot.Backpack,
-            EquipmentSlot.SecuredContainer
-        };
-
-        private sealed class SlotHelper
-        {
-            public Slot? parentSlot;
-
-            internal bool GetParentSlot(Slot slot)
-            {
-                return slot == parentSlot;
-            }
-        }
-
         private static string[] items =
         {
             "62178c4d4ecf221597654e3d", // Red Flare
@@ -60,25 +27,33 @@ namespace UseItemsFromAnywhere
             {
                 Inventory inventory =
                     (Inventory)AccessTools.Property(typeof(InventoryControllerClass), "Inventory").GetValue(__instance);
-
-                if (item.CurrentAddress != null && !(item.Parent is GClass2576) && item.CurrentAddress.Container.ParentItem is not StashClass)
+                
+                if (item is Weapon || item is GrenadeClass || item is MedsClass
+                    || item is FoodClass || item is GClass2542 || item is GClass2543
+                    || item is RecodableItemClass || item.GetItemComponent<KnifeComponent>() != null
+                    || items.Contains(item.TemplateId))
                 {
-                    if (inventory.GetItemsInSlots(BindAvailableSlotsExtended).Contains(item)
-                        && __instance.Examined(item)
-                        && FastAccessSlots.Select(inventory.Equipment.GetSlot).Any(new SlotHelper().GetParentSlot)
-                        && item is Weapon || item is GrenadeClass || item.GetItemComponent<KnifeComponent>() != null
-                        || item is MedsClass || item is FoodClass || item is GClass2542 || item is GClass2543
-                        || item is RecodableItemClass || items.Contains(item.TemplateId))
+                    if (inventory.GetAllEquipmentItems().Contains(item))
                     {
                         __result = true;
                         return;
                     }
                     else
                     {
+#if DEBUG
+                        ConsoleScreen.Log($"{item.TemplateId} is not in the players inventory");
+#endif
                         __result = false;
                         return;
                     }
                 }
+                else
+                {
+#if DEBUG
+                    ConsoleScreen.Log($"Item {item.TemplateId} not of bindable type");
+#endif
+                    return;
+                }           
             }
         }
 
@@ -88,33 +63,10 @@ namespace UseItemsFromAnywhere
                 typeof(InventoryControllerClass).GetMethod("IsAtReachablePlace", BindingFlags.Public | BindingFlags.Instance);
 
             [PatchPostfix]
-            private static void Postfix(InventoryControllerClass __instance, ref bool __result, ref Item item)
+            private static void Postfix(ref bool __result)
             {
-                Inventory inventory =
-                    (Inventory)AccessTools.Property(typeof(InventoryControllerClass), "Inventory").GetValue(__instance);
-
-                if (item.CurrentAddress is null || item.CurrentAddress.Container.ParentItem is StashClass)
-                {
-                    return;
-                }
-
-                LootItemClass? lootItemClass;
-
-                if ((inventory.Stash == null || item.Parent.Container != inventory.Stash.Grid)
-                    && ((lootItemClass = item as LootItemClass) == null || !lootItemClass.MissingVitalParts.Any())
-                    && inventory.GetItemsInSlots(BindAvailableSlotsExtended).Contains(item) && __instance.Examined(item)
-                    && item is Weapon || item is GrenadeClass || item.GetItemComponent<KnifeComponent>() != null
-                    || item is MedsClass || item is FoodClass || item is GClass2542 || item is GClass2543
-                    || item is RecodableItemClass || items.Contains(item.TemplateId))
-                {
-                    __result = true;
-                    return;
-                }
-                else
-                {
-                    __result = false;
-                    return;
-                }
+                __result = true;
+                return;
             }
         }
     }
