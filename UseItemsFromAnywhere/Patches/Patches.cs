@@ -1,4 +1,5 @@
 ﻿using Aki.Reflection.Patching;
+using Comfort.Common;
 using EFT.InventoryLogic;
 using EFT.UI;
 using HarmonyLib;
@@ -27,9 +28,9 @@ namespace UseItemsFromAnywhere
             {
                 Inventory inventory =
                     (Inventory)AccessTools.Property(typeof(InventoryControllerClass), "Inventory").GetValue(__instance);
-                
+
                 if (item is Weapon || item is GrenadeClass || item is MedsClass
-                    || item is FoodClass || item is GClass2542 || item is GClass2543
+                    || item is FoodClass || item is GClass2543 || item is GClass2544
                     || item is RecodableItemClass || item.GetItemComponent<KnifeComponent>() != null
                     || items.Contains(item.TemplateId))
                 {
@@ -53,7 +54,7 @@ namespace UseItemsFromAnywhere
                     ConsoleScreen.Log($"Item {item.TemplateId} not of bindable type");
 #endif
                     return;
-                }           
+                }
             }
         }
 
@@ -62,11 +63,26 @@ namespace UseItemsFromAnywhere
             protected override MethodBase GetTargetMethod() =>
                 typeof(InventoryControllerClass).GetMethod("IsAtReachablePlace", BindingFlags.Public | BindingFlags.Instance);
 
+
             [PatchPostfix]
-            private static void Postfix(ref bool __result)
+            private static void Postfix(InventoryControllerClass __instance, ref bool __result, ref Item item)
             {
-                __result = true;
-                return;
+                Inventory inventory =
+                    (Inventory)AccessTools.Property(typeof(InventoryControllerClass), "Inventory").GetValue(__instance); 
+
+                if (inventory.GetAllEquipmentItems().Contains(item))
+                {
+                    __result = true;
+                    return;
+                }
+                else
+                {
+#if DEBUG
+                        ConsoleScreen.Log($"{item.TemplateId} is not in the players inventory");
+#endif
+                    __result = false;
+                    return;
+                }
             }
         }
     }
